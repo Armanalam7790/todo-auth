@@ -67,4 +67,19 @@ return res.status(201).json({
 
  })
 
+ //delete 
+
+ app.delete('/api/notes/:id',async(req,res)=>{
+     let {id}=  req.params
+
+     let notsedelete  = await NotesModel.findByIdAndDelete(id)
+
+     return res.status(200).json({
+        message:"notes delete",
+        notsedelete
+     })
+
+
+ })
+
  export default app
