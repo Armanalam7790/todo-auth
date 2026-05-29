@@ -31,4 +31,16 @@ return res.status(201).json({
         
  })
 
+
+ // fetch all notes from db
+
+ app.get('/api/notes', async(req,res)=>{
+     let notes  =  await NotesModel.find()
+
+     res.status(200).json({
+        message:"notes fetched ",
+        notes
+     })
+ })
+
  export default app
