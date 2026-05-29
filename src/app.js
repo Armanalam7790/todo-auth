@@ -1,4 +1,5 @@
 import express  from 'express'
+import NotesModel from './models/notes.schema.js'
 
  const app  = express()
  app.use(express.json())
@@ -6,10 +7,27 @@ import express  from 'express'
 
  //craete notes post method
 
- app.post('/api/notes',(req,res)=>{
+ app.post('/api/notes', async(req,res)=>{
         let {title, description} =  req.body
+//validation
+        if (!title) {
+            return res.status(400).json({
+                message:"title is required"
+            })
+        }
+          if (!description) {
+            return res.status(400).json({
+                message:"title is required"
+            })
+        }
 
-        console.log(req.body);
+//add in db
+let newnotes  =  await NotesModel.create({title , description})
+
+return res.status(201).json({
+    message:"notes created",
+    newnotes
+})
         
  })
 
