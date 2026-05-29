@@ -43,4 +43,28 @@ return res.status(201).json({
      })
  })
 
+ //update notes
+
+ app.patch('/api/notes/:id', async(req,res)=>{
+        let {id}=  req.params
+        let {description}=  req.body
+
+        let updatenotes  =  await  NotesModel.findByIdAndUpdate(id)
+        updatenotes.description =  description
+        await updatenotes.save()
+
+        if (!updatenotes) {
+            return res.status(404).json({
+                message:"note not found"
+            })
+        }
+
+
+        return res.status(200).json({
+            message:"description update",
+            updatenotes
+        })
+
+ })
+
  export default app
