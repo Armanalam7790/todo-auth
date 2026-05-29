@@ -10,6 +10,10 @@ const NotesSchema  = new mongoose.Schema({
         type:String,
         trim:true
     },
+    user:{
+         type:String,
+        trim:true
+    }
 }) 
 
 let NotesModel  =  mongoose.model('notes', NotesSchema)
